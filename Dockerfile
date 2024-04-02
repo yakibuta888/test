@@ -15,6 +15,15 @@ COPY . .
 
 FROM python:3.11-slim as production
 
+# セキュリティアップデートの適用
+RUN apt-get update && apt-get upgrade -y \
+	&& apt-get install -y --no-install-recommends \
+		sudo \
+		bsdutils=2.38.1-5+deb12u1 \
+		util-linux=2.38.1-5+deb12u1 \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*
+
 ARG WORKDIR
 ENV PATH=${WORKDIR}/vendor/bin:$PATH \
 	PYTHONPATH=${WORKDIR}/vendor/bin:${WORKDIR} \

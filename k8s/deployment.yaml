@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment
+  labels:
+    app: test
+    type: app
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  replicas: 2  # 必要に応じてレプリカ数を調整
+  selector:
+    matchLabels:
+      app: test
+      type: app
+  template:
+    metadata:
+      labels:
+        app: test
+        type: app
+    spec:
+      containers:
+      - name: test-container
+        image: ghcr.io/yakibuta888/test/test_image:latest
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: ghcr-credentials
