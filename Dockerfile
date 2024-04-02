@@ -3,7 +3,7 @@ FROM python:3.11-slim as builder
 
 ARG WORKDIR
 ENV PATH=${WORKDIR}/vendor/bin:$PATH \
-	PYTHONPATH=${WORKDIR}/vendor/bin:${WORKDIR} \
+	PYTHONPATH=${WORKDIR}/vendor:${WORKDIR} \
 	PYTHONUSERBASE=${WORKDIR}/vendor
 WORKDIR ${WORKDIR}
 
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get upgrade -y \
 
 ARG WORKDIR
 ENV PATH=${WORKDIR}/vendor/bin:$PATH \
-	PYTHONPATH=${WORKDIR}/vendor/bin:${WORKDIR} \
+	PYTHONPATH=${WORKDIR}/vendor:${WORKDIR} \
 	PYTHONUSERBASE=${WORKDIR}/vendor
 WORKDIR ${WORKDIR}
 
