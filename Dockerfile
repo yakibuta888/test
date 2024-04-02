@@ -19,8 +19,8 @@ FROM python:3.11-slim as production
 RUN apt-get update && apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends \
 		sudo \
-		bsdutils=2.38.1-5+deb12u1 \
-		util-linux=2.38.1-5+deb12u1 \
+		bsdutils \
+		util-linux \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
